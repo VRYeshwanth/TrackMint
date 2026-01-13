@@ -4,6 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 
 import authRoutes from "./routes/authRoutes.js";
+import expenseRoutes from "./routes/expenseRoutes.js";
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/auth", authRoutes);
+app.use("/api/expenses", expenseRoutes);
 
 mongoose
     .connect(process.env.MONGO_URI)
