@@ -11,6 +11,24 @@ export const getAllExpenses = async (req, res) => {
     }
 };
 
+export const getSingleExpense = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const expense = await Expense.findById(id);
+
+        if (!expense)
+            return res.status(404).json({ error: "Expense not found !!" });
+
+        if (expense.userId.toString() !== req.user.id)
+            return res.status(403).json({ error: "Access Denied !!" });
+
+        return res.status(200).json(expense);
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+};
+
 export const createExpense = async (req, res) => {
     try {
         const { title, amount, category, description, date } = req.body;
@@ -40,5 +58,54 @@ export const createExpense = async (req, res) => {
         });
     } catch (err) {
         res.status(500).json({ error: err.message });
+    }
+};
+
+export const updateExpense = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { title, amount, category, description, date } = req.body;
+
+        const existingExpense = await Expense.findById(id);
+
+        if (!existingExpense)
+            return res.status(404).json({ error: "Expense not found !!" });
+
+        if (existingExpense.userId.toString() !== req.user.id)
+            return res.status(403).json({ error: "Access Denied !!" });
+
+        if (title !== undefined) existingExpense.title = title;
+        if (amount !== undefined) existingExpense.amount = amount;
+        if (category !== undefined) existingExpense.category = category;
+        if (date !== undefined) existingExpense.date = date;
+        if (description !== undefined)
+            existingExpense.description = description;
+
+        await existingExpense.save();
+
+        res.status(200).json(existingExpense);
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+};
+
+export const deleteExpense = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const existingExpense = await Expense.findById(id);
+
+        if (!existingExpense)
+            return res.status(404).json({ error: "Expense not found !!" });
+
+        if (existingExpense.userId.toString() !== req.user.id)
+            return res.status(403).json({ error: "Access Denied !!" });
+
+        await Expense.deleteOne({ _id: id });
+        return res
+            .status(200)
+            .json({ message: "Expense deleted successfully !!" });
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
     }
 };
