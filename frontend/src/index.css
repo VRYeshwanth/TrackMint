@@ -1,3 +1,29 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+@layer theme, base, components, utilities;
+
+@layer base {
+    :root {
+        --primary: #22c55e;
+        --primary-hover: #16a34a;
+
+        --app-bg: #f5f7fa;
+        --card-bg: #ffffff;
+
+        --text-primary: #111827;
+        --text-secondary: #4b5563;
+
+        --border-default: #e5e7eb;
+    }
+
+    .dark {
+        --app-bg: #101922;
+        --card-bg: #1a2633;
+
+        --text-primary: #f9fafb;
+        --text-secondary: #9ca3af;
+
+        --border-default: #1f2937;
+    }
+}
