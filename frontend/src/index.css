@@ -5,6 +5,8 @@
 
 @layer base {
     :root {
+        --font: "Outfit", sans-serif;
+
         --primary: #22c55e;
         --primary-hover: #16a34a;
 
@@ -15,6 +17,10 @@
         --text-secondary: #4b5563;
 
         --border-default: #e5e7eb;
+
+        body {
+            font-family: var(--font);
+        }
     }
 
     .dark {
