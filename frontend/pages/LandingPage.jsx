@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function LandingPage() {
     return (
-        <div className="min-h-screen bg-(-app-bg) text-(--text-primary) flex flex-col items-center px-6 py-8 md:py-16">
+        <div className="min-h-screen bg-(--app-bg) text-(--text-primary) flex flex-col items-center px-6 py-8 md:py-16">
             <header className="w-full text-center flex justify-center items-center gap-2">
                 <span className="material-symbols-rounded text-(--primary) text-4xl!">
                     savings
@@ -22,7 +22,7 @@ export default function LandingPage() {
                     <Link className="bg-(--primary) hover:bg-(--primary-hover) text-white px-6 py-3 rounded-xl font-medium transition cursor-pointer">
                         Get Started
                     </Link>
-                    <Link className="text-(--text-secondary) hover:text-(--text-primary) transition">
+                    <Link className="text-(--text-secondary) hover:text-(--text-primary) transition" to="/register">
                         Create an account
                     </Link>
                 </div>

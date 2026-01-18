@@ -18,6 +18,8 @@
 
         --border-default: #e5e7eb;
 
+        --input-default: #ffffff;
+
         body {
             font-family: var(--font);
         }
@@ -31,5 +33,7 @@
         --text-secondary: #9ca3af;
 
         --border-default: #1f2937;
+
+        --input-default: #233648;
     }
 }
