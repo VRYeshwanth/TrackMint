@@ -19,11 +19,11 @@ export default function LandingPage() {
                     any clutter
                 </p>
                 <div className="flex flex-col items-center gap-4 mt-4">
-                    <Link className="bg-(--primary) hover:bg-(--primary-hover) text-white px-6 py-3 rounded-xl font-medium transition cursor-pointer">
+                    <Link
+                        className="bg-(--primary) hover:bg-(--primary-hover) text-white px-6 py-3 rounded-xl font-medium transition cursor-pointer"
+                        to="/register"
+                    >
                         Get Started
-                    </Link>
-                    <Link className="text-(--text-secondary) hover:text-(--text-primary) transition" to="/register">
-                        Create an account
                     </Link>
                 </div>
             </main>
