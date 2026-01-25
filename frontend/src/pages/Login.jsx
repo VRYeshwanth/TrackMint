@@ -1,6 +1,42 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axiosInstance from "../utils/axios.js";
+import { useLoader } from "../context/LoaderContext.jsx";
 
-export default function login() {
+export default function Login() {
+    const [form, setForm] = useState({
+        email: "",
+        password: "",
+    });
+
+    const navigate = useNavigate();
+    const { showLoader, hideLoader } = useLoader();
+
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            showLoader();
+
+            const response = await axiosInstance.post("/api/auth/login", {
+                email: form.email,
+                password: form.password,
+            });
+
+            localStorage.setItem("token", response.data.token);
+
+            navigate("/");
+        } catch (err) {
+            alert(err.response?.data?.error || "Login failed");
+        } finally {
+            hideLoader();
+        }
+    };
+
     return (
         <div className="flex flex-col items-center text-(--text-primary) py-4">
             <header className="flex flex-col items-center gap-2">
@@ -18,7 +54,7 @@ export default function login() {
                     </p>
                 </div>
 
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={handleSubmit}>
                     <div>
                         <label className="block text-sm font-medium mb-1">
                             Email Address
@@ -29,6 +65,9 @@ export default function login() {
                             </span>
                             <input
                                 type="email"
+                                name="email"
+                                value={form.email}
+                                onChange={handleChange}
                                 placeholder="name@company.com"
                                 className="w-full bg-transparent outline-none text-sm"
                                 required
@@ -46,6 +85,9 @@ export default function login() {
                             </span>
                             <input
                                 type="password"
+                                name="password"
+                                value={form.password}
+                                onChange={handleChange}
                                 placeholder="Enter your password"
                                 className="w-full bg-transparent outline-none text-sm"
                                 required

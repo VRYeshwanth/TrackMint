@@ -33,7 +33,7 @@ export default function Register() {
 
             navigate("/login");
         } catch (err) {
-            alert(err);
+            alert(err.response?.data?.error || "Login failed");
         } finally {
             hideLoader();
         }
