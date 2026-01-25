@@ -1,10 +1,10 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
 
-import AuthLayout from "../layouts/AuthLayout.jsx";
+import AuthLayout from "./layouts/AuthLayout.jsx";
 
-import LandingPage from "../pages/LandingPage.jsx";
-import Register from "../pages/Register.jsx";
-import Login from "../pages/Login.jsx";
+import LandingPage from "./pages/LandingPage.jsx";
+import Register from "./pages/Register.jsx";
+import Login from "./pages/Login.jsx";
 
 export default function App() {
     return (
