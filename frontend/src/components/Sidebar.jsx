@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
+import Avatar from "./Avatar.jsx";
 
 export default function Sidebar() {
     const navigate = useNavigate();
@@ -11,11 +12,22 @@ export default function Sidebar() {
     };
 
     return (
-        <aside className="w-64 h-screen border-r flex flex-col justify-between p-4">
+        <aside
+            className="w-64 h-screen flex flex-col justify-between px-5 py-6
+                          bg-(--card-bg) border-r border-(--border-default)
+                          text-(--text-primary)"
+        >
             <div>
-                <h1 className="text-xl font-semibold mb-6">TrackMint</h1>
+                <div className="flex items-center gap-3 mb-8">
+                    <span className="material-symbols-rounded text-(--primary) text-4xl! leading-none">
+                        savings
+                    </span>
+                    <h1 className="text-2xl font-semibold tracking-tight leading-none">
+                        TrackMint
+                    </h1>
+                </div>
 
-                <nav className="flex flex-col gap-2">
+                <nav className="flex flex-col gap-1">
                     <SidebarLink
                         to="/dashboard"
                         icon="space_dashboard"
@@ -23,25 +35,29 @@ export default function Sidebar() {
                     />
                 </nav>
 
-                <button className="mt-6 w-full border rounded p-2 flex items-center justify-center gap-2 cursor-pointer">
-                    <span className="material-symbols-rounded">add</span>
+                <button className="mt-8 w-full flex items-center justify-center gap-2 bg-(--primary) hover:bg-(--primary-hover) text-white font-medium rounded-lg h-11 transition-colors duration-200 cursor-pointer">
+                    <span className="material-symbols-rounded text-[20px]">
+                        add
+                    </span>
                     Add Expense
                 </button>
             </div>
 
-            <div className="border-t pt-4">
-                <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 rounded-full bg-gray-300" />
+            <div className="border-t border-(--border-default) pt-5">
+                <div className="flex items-center gap-3 mb-4">
+                    <Avatar name="" />
                     <div>
                         <p className="text-sm font-medium">User Name</p>
                     </div>
                 </div>
 
                 <button
-                    className="flex items-center gap-2 text-sm cursor-pointer"
                     onClick={handleLogout}
+                    className="flex items-center gap-2 text-sm font-medium px-3 py-2 rounded-lg text-(--text-secondary)  hover:text-red-600 hover:bg-red-500/10  dark:hover:bg-red-500/20 transition-colors duration-200 cursor-pointer"
                 >
-                    <span className="material-symbols-rounded">logout</span>
+                    <span className="material-symbols-rounded text-[20px]">
+                        logout
+                    </span>
                     Logout
                 </button>
             </div>
@@ -55,12 +71,17 @@ function SidebarLink({ to, icon, label }) {
             to={to}
             end={to === "/"}
             className={({ isActive }) =>
-                `flex items-center gap-3 p-2 rounded 
-        ${isActive ? "bg-gray-200" : "hover:bg-gray-100"}`
+                `flex items-center gap-3 px-3 h-11 rounded-lg text-sm font-medium
+                 transition-all duration-200
+                 ${
+                     isActive
+                         ? "bg-(--primary)/10 text-(--primary)"
+                         : "text-(--text-secondary) hover:bg-black/5 dark:hover:bg-white/5 hover:text-(--text-primary)"
+                 }`
             }
         >
-            <span className="material-symbols-rounded text-base">{icon}</span>
-            <span>{label}</span>
+            <span className="material-symbols-rounded text-[20px]">{icon}</span>
+            {label}
         </NavLink>
     );
 }
