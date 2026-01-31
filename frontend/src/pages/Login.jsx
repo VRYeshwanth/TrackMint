@@ -33,7 +33,7 @@ export default function Login() {
 
             showToast("success", "Login Success", response.data.message);
 
-            login(response.data.token);
+            login(response.data.token, response.data.user);
 
             navigate("/dashboard");
         } catch (err) {

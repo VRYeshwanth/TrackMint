@@ -4,7 +4,7 @@ import Avatar from "./Avatar.jsx";
 
 export default function Sidebar() {
     const navigate = useNavigate();
-    const { logout } = useAuth();
+    const { logout, user } = useAuth();
 
     const handleLogout = () => {
         logout();
@@ -45,9 +45,9 @@ export default function Sidebar() {
 
             <div className="border-t border-(--border-default) pt-5">
                 <div className="flex items-center gap-3 mb-4">
-                    <Avatar name="" />
+                    <Avatar name={user?.username} />
                     <div>
-                        <p className="text-sm font-medium">User Name</p>
+                        <p className="text-sm font-medium">{user?.username}</p>
                     </div>
                 </div>
 
