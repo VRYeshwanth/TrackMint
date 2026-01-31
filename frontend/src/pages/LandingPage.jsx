@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext.jsx";
 
 export default function LandingPage() {
+    const { isAuth } = useAuth();
+
     return (
         <div className="min-h-screen bg-(--app-bg) text-(--text-primary) flex flex-col items-center px-6 py-8 md:py-16">
             <header className="w-full text-center flex justify-center items-center gap-2">
@@ -21,7 +24,7 @@ export default function LandingPage() {
                 <div className="flex flex-col items-center gap-4 mt-4">
                     <Link
                         className="bg-(--primary) hover:bg-(--primary-hover) text-white px-6 py-3 rounded-xl font-medium transition cursor-pointer"
-                        to="/register"
+                        to={isAuth ? "/dashboard" : "/register"}
                     >
                         Get Started
                     </Link>

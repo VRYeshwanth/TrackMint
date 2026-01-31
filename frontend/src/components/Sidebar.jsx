@@ -1,6 +1,15 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext.jsx";
 
 export default function Sidebar() {
+    const navigate = useNavigate();
+    const { logout } = useAuth();
+
+    const handleLogout = () => {
+        logout();
+        navigate("/login");
+    };
+
     return (
         <aside className="w-64 h-screen border-r flex flex-col justify-between p-4">
             <div>
@@ -28,7 +37,10 @@ export default function Sidebar() {
                     </div>
                 </div>
 
-                <button className="flex items-center gap-2 text-sm cursor-pointer">
+                <button
+                    className="flex items-center gap-2 text-sm cursor-pointer"
+                    onClick={handleLogout}
+                >
                     <span className="material-symbols-rounded">logout</span>
                     Logout
                 </button>

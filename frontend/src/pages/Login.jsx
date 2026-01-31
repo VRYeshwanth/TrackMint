@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axios.js";
 import { useLoader } from "../context/LoaderContext.jsx";
 import { useToast } from "../context/ToastContext.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
 
 export default function Login() {
     const [form, setForm] = useState({
@@ -13,6 +14,7 @@ export default function Login() {
     const navigate = useNavigate();
     const { showLoader, hideLoader } = useLoader();
     const { showToast } = useToast();
+    const { login } = useAuth();
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -31,7 +33,7 @@ export default function Login() {
 
             showToast("success", "Login Success", response.data.message);
 
-            localStorage.setItem("token", response.data.token);
+            login(response.data.token);
 
             navigate("/dashboard");
         } catch (err) {
