@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axios.js";
 import { useLoader } from "../context/LoaderContext.jsx";
+import { useToast } from "../context/ToastContext.jsx";
 
 export default function Login() {
     const [form, setForm] = useState({
@@ -11,6 +12,7 @@ export default function Login() {
 
     const navigate = useNavigate();
     const { showLoader, hideLoader } = useLoader();
+    const { showToast } = useToast();
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -27,11 +29,13 @@ export default function Login() {
                 password: form.password,
             });
 
+            showToast("success", "Login Success", response.data.message);
+
             localStorage.setItem("token", response.data.token);
 
-            navigate("/");
+            navigate("/dashboard");
         } catch (err) {
-            alert(err.response?.data?.error || "Login failed");
+            showToast("error", "Login Failed", err.response?.data?.error);
         } finally {
             hideLoader();
         }
