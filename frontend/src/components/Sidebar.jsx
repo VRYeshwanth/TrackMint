@@ -16,7 +16,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
 
     return (
         <aside
-            className={` fixed md:static top-0 left-0 z-40 w-64 h-screen flex flex-col justify-between px-5 py-6 bg-(--card-bg) border-r border-(--border-default) text-(--text-primary) transform transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0
+            className={` fixed md:static top-0 left-0 z-40 w-64 min-h-screen flex flex-col justify-between px-5 py-6 bg-(--card-bg) border-r border-(--border-default) text-(--text-primary) transform transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0
     `}
         >
             <div>
