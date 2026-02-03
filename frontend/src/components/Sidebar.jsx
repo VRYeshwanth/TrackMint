@@ -3,21 +3,21 @@ import { useAuth } from "../context/AuthContext.jsx";
 import { useTheme } from "../context/ThemeContext.jsx";
 import Avatar from "./Avatar.jsx";
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, setIsOpen }) {
     const navigate = useNavigate();
     const { logout, user } = useAuth();
     const { theme, toggleTheme } = useTheme();
 
     const handleLogout = () => {
         logout();
+        setIsOpen(false);
         navigate("/login");
     };
 
     return (
         <aside
-            className="w-64 h-screen flex flex-col justify-between px-5 py-6
-                          bg-(--card-bg) border-r border-(--border-default)
-                          text-(--text-primary)"
+            className={` fixed md:static top-0 left-0 z-40 w-64 h-screen flex flex-col justify-between px-5 py-6 bg-(--card-bg) border-r border-(--border-default) text-(--text-primary) transform transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0
+    `}
         >
             <div>
                 <div className="flex items-center gap-3 mb-8">
@@ -34,6 +34,7 @@ export default function Sidebar() {
                         to="/dashboard"
                         icon="space_dashboard"
                         label="Dashboard"
+                        setIsOpen={setIsOpen}
                     />
                 </nav>
 
@@ -77,11 +78,12 @@ export default function Sidebar() {
     );
 }
 
-function SidebarLink({ to, icon, label }) {
+function SidebarLink({ to, icon, label, setIsOpen }) {
     return (
         <NavLink
             to={to}
             end={to === "/"}
+            onClick={() => setIsOpen(false)}
             className={({ isActive }) =>
                 `flex items-center gap-3 px-3 h-11 rounded-lg text-sm font-medium
                  transition-all duration-200
