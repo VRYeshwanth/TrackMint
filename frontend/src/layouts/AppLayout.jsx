@@ -11,7 +11,7 @@ export default function AppLayout() {
     }, [isOpen]);
 
     return (
-        <div className="flex">
+        <div className="flex min-h-screen">
             <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
 
             {isOpen && (
@@ -22,7 +22,7 @@ export default function AppLayout() {
             )}
 
             <div className="flex-1 flex flex-col">
-                <header className="md:hidden h-14 flex items-center px-4 border-b border-gray-200 bg-white">
+                <header className="md:hidden h-14 flex items-center px-4 border-b border-(--border-default) bg-(--app-bg) text-(--text-primary)">
                     <button
                         onClick={() => setIsOpen(true)}
                         className="flex items-center cursor-pointer"
@@ -34,7 +34,7 @@ export default function AppLayout() {
                     <h1 className="ml-4 font-semibold text-lg">TrackMint</h1>
                 </header>
 
-                <main className="flex-1 p-4 md:p-6">
+                <main className="flex-1 p-4 md:p-6 bg-(--app-bg)">
                     <Outlet />
                 </main>
             </div>
