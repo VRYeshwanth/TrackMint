@@ -5,6 +5,7 @@ import connectDB from './config/db.js';
 import { errorHandler, notFound } from './middleware/errorMiddleware.js';
 import authRoutes from './routes/authRoutes.js';
 import transactionRoutes from './routes/transactionRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -19,6 +20,7 @@ app.use(cors()); // Enable CORS
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/transactions', transactionRoutes);
+app.use('/api/users', userRoutes);
 
 // Base route for testing
 app.get('/', (req, res) => {

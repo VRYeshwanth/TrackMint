@@ -31,9 +31,9 @@ export const Register = () => {
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">Create Account</h2>
+    <div className="min-h-[80vh] flex items-center justify-center p-4 sm:p-6">
+      <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-6 sm:p-8 md:p-10 border border-gray-100">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-6 sm:mb-8">Create Account</h2>
         {error && <div className="mb-4 bg-red-50 text-red-600 p-3 rounded-md text-sm text-center font-medium">{error}</div>}
         
         <form onSubmit={handleRegister}>
@@ -63,14 +63,14 @@ export const Register = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="mb-8"
+            className="mb-6 sm:mb-8"
           />
-          <Button variant="primary" type="submit" className="w-full py-3 text-lg shadow-md" disabled={isLoading}>
+          <Button variant="primary" type="submit" className="w-full py-2.5 sm:py-3 text-base sm:text-lg shadow-md" disabled={isLoading}>
             {isLoading ? 'Creating Account...' : 'Get Started'}
           </Button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-gray-600">
+        <p className="mt-5 sm:mt-6 text-center text-sm text-gray-600">
           Already have an account? <Link to={ROUTES.LOGIN} className="text-primary font-semibold hover:underline">Log in</Link>
         </p>
       </div>
