@@ -101,7 +101,7 @@ export const AvatarMenu = () => {
         </button>
         
         {dropdownOpen && (
-          <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-40">
+          <div className="absolute bottom-full left-0 mb-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-40">
             <div className="px-4 py-2 border-b border-gray-100 mb-1">
               <p className="text-sm font-semibold text-gray-900 truncate">{user?.name || "User"}</p>
               <p className="text-xs text-gray-500 truncate">{user?.email}</p>

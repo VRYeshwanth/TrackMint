@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../constants/routes';
 import { AuthContext } from '../context/AuthContext';
 import { useLayout } from '../context/LayoutContext';
-import { LayoutDashboard, LogIn, UserPlus, Leaf, Menu } from 'lucide-react';
+import { LogIn, UserPlus, Leaf, Menu } from 'lucide-react';
 import { Button } from './ui/Button';
 import { AvatarMenu } from './AvatarMenu';
 
@@ -33,14 +33,10 @@ export const Navbar = () => {
           
           <div className="flex items-center space-x-2 sm:space-x-4">
             {isAuthenticated ? (
-              <>
-                <Link to={ROUTES.DASHBOARD} className="text-gray-600 hover:text-primary transition flex items-center gap-1 sm:gap-2 font-medium">
-                  <LayoutDashboard className="w-5 h-5 sm:w-4 sm:h-4" />
-                  <span className="hidden sm:inline">Dashboard</span>
-                </Link>
-                <div className="h-6 w-px bg-gray-200 hidden sm:block"></div>
-                <AvatarMenu />
-              </>
+              <div className="flex items-center">
+                {/* AvatarMenu removed from here, moving to Sidebar */}
+                <div className="w-10 h-10"></div> {/* Spacer or empty if needed */}
+              </div>
             ) : (
               <>
                 <Link to={ROUTES.LOGIN}>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, 
@@ -12,6 +12,8 @@ import {
 } from 'lucide-react';
 import { useLayout } from '../context/LayoutContext';
 import { ROUTES } from '../constants/routes';
+import { AvatarMenu } from './AvatarMenu';
+import { AuthContext } from '../context/AuthContext';
 
 const sidebarItems = [
   { icon: LayoutDashboard, label: 'Dashboard', path: ROUTES.DASHBOARD },
@@ -23,6 +25,7 @@ const sidebarItems = [
 ];
 
 export const Sidebar = () => {
+  const { user } = useContext(AuthContext);
   const { isSidebarOpen, setSidebarOpen } = useLayout();
   const location = useLocation();
 
@@ -90,15 +93,19 @@ export const Sidebar = () => {
             })}
           </div>
 
-          {/* Optional: User section at bottom of sidebar could go here */}
-          <div className="p-4 border-t border-gray-100">
-            <div className="bg-gray-50 rounded-2xl p-4 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">
-                TM
-              </div>
-              <div className="flex flex-col">
-                <span className="text-sm font-semibold text-gray-900">Premium Plan</span>
-                <span className="text-xs text-gray-500 underline cursor-pointer hover:text-primary">Upgrade now</span>
+          {/* User Profile Section at bottom of sidebar */}
+          <div className="p-4 border-t border-gray-100 mt-auto">
+            <div className="flex items-center justify-between bg-gray-50 rounded-2xl p-3">
+              <div className="flex items-center gap-3">
+                <AvatarMenu />
+                <div className="flex flex-col min-w-0">
+                   <span className="text-sm font-semibold text-gray-900 truncate">
+                     {user?.name || "User"}
+                   </span>
+                   <span className="text-xs text-gray-500 truncate">
+                     {user?.email || "Account Settings"}
+                   </span>
+                </div>
               </div>
             </div>
           </div>
